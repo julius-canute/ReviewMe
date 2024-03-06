@@ -262,8 +262,6 @@ var slackMessage = function (review, config, appInformation) {
         footer += " - " + appInformation.appName + ", " + review.storeName + " (" + appInformation.region + ")";
     }
 
-    footer += ' - <' + translateUrl + '|Translate>';
-
     var title = stars;
     if (review.title) {
         title += " – " + review.title;
@@ -279,8 +277,18 @@ var slackMessage = function (review, config, appInformation) {
                 "thumb_url": config.showAppIcon ? (review.appIcon ? review.appIcon : appInformation.appIcon) : config.botIcon,
                 "title": title,
                 "text": text,
-                "footer": footer
+                "footer": footer,
+                "attachment_type": "default",
+                "actions": [
+                    {
+                        "type": "button",
+                        "text": "Translate",
+                        "url": translateUrl
+                    }
+                ]
             }
         ]
     };
 };
+
+

@@ -180,8 +180,6 @@ var slackMessage = function (review, config, appInformation) {
         footer += " - " + appInformation.appName + ", " + review.storeName;
     }
 
-    footer += ' - <' + translateUrl + '|Translate>';
-
     var title = stars;
     if (review.title) {
         title = title + " – " + review.title;
@@ -192,20 +190,25 @@ var slackMessage = function (review, config, appInformation) {
         "attachments": [
             {
                 "mrkdwn_in": ["text", "pretext", "title", "footer"],
-
                 "color": color,
                 "author_name": review.author,
-
                 "thumb_url": config.showAppIcon ? appInformation.appIcon : config.botIcon,
-
                 "title": title,
-
                 "text": text,
-                "footer": footer
+                "footer": footer,
+                "attachment_type": "default",
+                "actions": [
+                    {
+                        "type": "button",
+                        "text": "Translate",
+                        "url": translateUrl
+                    }
+                ]
             }
         ]
     };
 };
+
 
 var getVersionNameForCode = function (versionCode) {
     var version = androidVersions.get(versionCode);
