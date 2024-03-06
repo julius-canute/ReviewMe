@@ -249,6 +249,8 @@ var slackMessage = function (review, config, appInformation) {
     var text = "";
     text += review.text + "\n";
 
+    var translateUrl = 'https://translate.google.com/?sl=auto&tl=en&text=' + encodeURIComponent(review.text) + '&op=translate';
+
     var footer = "";
     if (review.version) {
         footer += " for v" + review.version;
@@ -259,6 +261,8 @@ var slackMessage = function (review, config, appInformation) {
     } else {
         footer += " - " + appInformation.appName + ", " + review.storeName + " (" + appInformation.region + ")";
     }
+
+    footer += ' - <' + translateUrl + '|Translate>';
 
     var title = stars;
     if (review.title) {
